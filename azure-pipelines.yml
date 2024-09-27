@@ -7,9 +7,9 @@ trigger:
 - main
 
 pool:
-  name: Default
+  name: local
   demands:
-    - agent.name -equals local-server
+    - agent.name -equals macAgent
 
 steps:
 - script: echo Hello, world!

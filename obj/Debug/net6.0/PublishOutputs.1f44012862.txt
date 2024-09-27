@@ -1,0 +1,11 @@
+/Users/godwinagbenyenu/Desktop/testApp/WebAppDemo
+/Users/godwinagbenyenu/Desktop/testApp/appsettings.Development.json
+/Users/godwinagbenyenu/Desktop/testApp/appsettings.json
+/Users/godwinagbenyenu/Desktop/testApp/WebAppDemo.dll
+/Users/godwinagbenyenu/Desktop/testApp/WebAppDemo.deps.json
+/Users/godwinagbenyenu/Desktop/testApp/WebAppDemo.runtimeconfig.json
+/Users/godwinagbenyenu/Desktop/testApp/WebAppDemo.pdb
+/Users/godwinagbenyenu/Desktop/testApp/Microsoft.OpenApi.dll
+/Users/godwinagbenyenu/Desktop/testApp/Swashbuckle.AspNetCore.Swagger.dll
+/Users/godwinagbenyenu/Desktop/testApp/Swashbuckle.AspNetCore.SwaggerGen.dll
+/Users/godwinagbenyenu/Desktop/testApp/Swashbuckle.AspNetCore.SwaggerUI.dll

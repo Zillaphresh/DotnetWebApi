@@ -17,7 +17,7 @@ variables:
 steps:
 
 - script: |
-    sudo brew update
+    sudo brew upgrade
     sudo brew install --cask dotnet-sdk
     dotnet --version
     sudo export PATH="$PATH:/usr/local/share/dotnet"

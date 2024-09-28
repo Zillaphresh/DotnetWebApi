@@ -45,6 +45,10 @@ stages:
         
         
   - stage: Deploy_Dev
+    pool:
+      name: local
+      demands:
+      - agent.name -equals macAgent
     jobs:
       - deployment: Deploy_to_development
         strategy: 

@@ -15,11 +15,31 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'restore'
+    projects: '**/*.csproj'
+    restoreArguments: 'build $(buildConfiguration)'
+    feedsToUse: 'select'
+  displayName: 'dotnet rstore $(buildConfiguration)'
 - task: DotNetCoreCLI@2
   displayName: 'dotnet build $(buildConfiguration)'
   inputs:
     command: 'build'
     projects: '**/*.csproj'
     arguments: '--configuration $(buildConfiguration)'
+    
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'test'
+    projects: '**/*.csproj'
+    arguments: '--configuration $(buildConfiguration)'
+  displayName: 'dotnet test $(buildConfiguration)'
+
+
+
+
   
 

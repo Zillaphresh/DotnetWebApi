@@ -16,13 +16,20 @@ variables:
 
 steps:
 
+- script: |
+    brew update
+    brew install --cask dotnet-sdk
+    dotnet --version
+    export PATH="$PATH:/usr/local/share/dotnet"
+    source ~/.zshrc  # or ~/.bashrc
+  displayName: 'Prepping Installation'
 - task: DotNetCoreCLI@2
   inputs:
     command: 'restore'
     projects: '**/*.csproj'
     restoreArguments: 'build $(buildConfiguration)'
     feedsToUse: 'select'
-  displayName: 'dotnet rstore $(buildConfiguration)'
+  displayName: 'dotnet restore $(buildConfiguration)'
 - task: DotNetCoreCLI@2
   displayName: 'dotnet build $(buildConfiguration)'
   inputs:

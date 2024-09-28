@@ -17,11 +17,11 @@ variables:
 steps:
 
 - script: |
-    brew update
-    brew install --cask dotnet-sdk
+    sudo brew update
+    sudo brew install --cask dotnet-sdk
     dotnet --version
-    export PATH="$PATH:/usr/local/share/dotnet"
-    source ~/.zshrc  # or ~/.bashrc
+    sudo export PATH="$PATH:/usr/local/share/dotnet"
+    sudo source ~/.zshrc  # or ~/.bashrc
   displayName: 'Prepping Installation'
 - task: DotNetCoreCLI@2
   inputs:

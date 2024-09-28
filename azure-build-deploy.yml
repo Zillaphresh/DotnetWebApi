@@ -2,17 +2,19 @@ trigger:
  branches:
   include:
     - main
+
 pool:
  name: local
  demands:
   - agent.name -equals macAgent
+
 variables:
   buildConfiguration: 'Release'
   output: weatherApp
 stages:
   - stage: Build
     jobs:
-    - job: Test-Build
+    - job: Test_Build
       steps:
         - task: DotNetCoreCLI@2
           displayName: 'dotnet build'
@@ -42,9 +44,9 @@ stages:
             publishLocation: 'Container'
         
         
-  - stage: Deploy Dev
+  - stage: Deploy_Dev
     jobs:
-      - deployment: Deploy to development
+      - deployment: Deploy_to_development
         strategy: 
          runOnce:
            deploy:
@@ -56,7 +58,6 @@ stages:
                   downloadType: 'single'
                   artifactName: 'drop'
                   downloadPath: '$(System.ArtifactsDirectory)'
-        dependsOn: Build
         environment:
          name: staging
          resourceName:  ip-172-31-6-4

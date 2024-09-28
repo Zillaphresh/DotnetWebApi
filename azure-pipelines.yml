@@ -20,13 +20,14 @@ variables:
 steps:
 - task: NuGetToolInstaller@1
   displayName: 'Nuget Installation' 
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'restore'
-    projects: '**/*.csproj'
-    restoreArguments: 'build $(buildConfiguration)'
-    feedsToUse: 'select'
-  displayName: 'dotnet restore $(buildConfiguration)'
+
+# - task: DotNetCoreCLI@2
+#   inputs:
+#     command: 'restore'
+#     projects: '**/*.csproj'
+#     restoreArguments: 'build $(buildConfiguration)'
+#     feedsToUse: 'select'
+#   displayName: 'dotnet restore $(buildConfiguration)'
 - task: DotNetCoreCLI@2
   displayName: 'dotnet build $(buildConfiguration)'
   inputs:

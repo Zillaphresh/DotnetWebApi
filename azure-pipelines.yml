@@ -7,22 +7,16 @@ trigger:
 - main
 
 pool:
-  name: local
-  demands:
-    - agent.name -equals macAgent
+  vmImage: ubuntu-latest
+
+
 
 variables:
   buildConfiguration: 'Release'
 
 steps:
-
-- script: |
-    sudo brew upgrade
-    sudo brew install --cask dotnet-sdk
-    dotnet --version
-    sudo export PATH="$PATH:/usr/local/share/dotnet"
-    sudo source ~/.zshrc  # or ~/.bashrc
-  displayName: 'Prepping Installation'
+- task: NuGetToolInstaller@1
+  displayName: 'Nuget Installation' 
 - task: DotNetCoreCLI@2
   inputs:
     command: 'restore'
@@ -46,7 +40,22 @@ steps:
   displayName: 'dotnet test $(buildConfiguration)'
 
 
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet publish $(buildConfiguration)'
+  inputs:
+    command: 'publish'
+    publishWebProjects: false
+    projects: '**/*.csproj'
+    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+    modifyOutputPath: false
+    workingDirectory: '$(System.DefaultWorkingDirectory)'
 
-
+- task: PublishBuildArtifacts@1
+  displayName: 'dotnet publish artifacts'
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'dotnetwebapp'
+    publishLocation: 'Container'
+    StoreAsTar: true
   
 

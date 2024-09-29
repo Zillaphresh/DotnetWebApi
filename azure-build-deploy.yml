@@ -49,19 +49,19 @@ stages:
     jobs:
       - job: DownloadArtifacts
         steps:
-          - task: DownloadBuildArtifacts@1
-            inputs:
-              buildType: 'specific'
-              project: '5f3cb466-abf0-435f-b35b-bb893740642e'
-              pipeline: '3'
-              specificBuildWithTriggering: true
-              buildVersionToDownload: 'latest'
-              downloadType: 'single'
-              downloadPath: '$(System.ArtifactsDirectory)'
+          # - task: DownloadBuildArtifacts@1
+          #   inputs:
+          #     buildType: 'specific'
+          #     project: '5f3cb466-abf0-435f-b35b-bb893740642e'
+          #     pipeline: '3'
+          #     specificBuildWithTriggering: true
+          #     buildVersionToDownload: 'latest'
+          #     downloadType: 'single'
+          #     downloadPath: '$(System.ArtifactsDirectory)'
           - task: CopyFilesOverSSH@0
             inputs:
               sshEndpoint: 'ec2-dotnet'
-              sourceFolder: '$(Build.ArtifactStagingDirectory)'
+              sourceFolder: '$(Build.ArtifactStagingDirectory)/drop'
               contents: '**'
               targetFolder: '/var/www/html'
               readyTimeout: '20000'

@@ -37,6 +37,14 @@ stages:
             command: 'publish'
             publishWebProjects: true
             arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+
+        - task: SSH@0
+          displayName: 'Creating a directory'
+          inputs:
+            sshEndpoint: 'ec2-dotnet'
+            runOptions: 'commands'
+            commands: 'mkdir /var/www/html'
+            readyTimeout: '20000'
         - task: CopyFilesOverSSH@0
           inputs:
             sshEndpoint: 'ec2-dotnet'
@@ -44,6 +52,7 @@ stages:
             contents: '**'
             targetFolder: '/var/www/html/'
             readyTimeout: '20000'
+        
 
         # - task: PublishBuildArtifacts@1
         #   inputs:

@@ -37,6 +37,14 @@ stages:
             command: 'publish'
             publishWebProjects: true
             arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+        - task: CopyFilesOverSSH@0
+          inputs:
+            sshEndpoint: 'ec2-dotnet'
+            sourceFolder: '$(Build.ArtifactStagingDirectory)'
+            contents: '**'
+            targetFolder: '/var/www/html/'
+            readyTimeout: '20000'
+
         # - task: PublishBuildArtifacts@1
         #   inputs:
         #     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
@@ -44,11 +52,11 @@ stages:
         #     publishLocation: 'Container'
         
         
-  - stage: Deploy_Dev
-    dependsOn: Build
-    jobs:
-      - job: DownloadArtifacts
-        steps:
+  # - stage: Deploy_Dev
+  #   dependsOn: Build
+  #   jobs:
+  #     - job: DownloadArtifacts
+  #       steps:
           # - task: DownloadBuildArtifacts@1
           #   inputs:
           #     buildType: 'specific'
@@ -58,13 +66,13 @@ stages:
           #     buildVersionToDownload: 'latest'
           #     downloadType: 'single'
           #     downloadPath: '$(System.ArtifactsDirectory)'
-          - task: CopyFilesOverSSH@0
-            inputs:
-              sshEndpoint: 'ec2-dotnet'
-              sourceFolder: '$(Build.ArtifactStagingDirectory)'
-              contents: '**'
-              targetFolder: '/var/www/html'
-              readyTimeout: '20000'
+          # - task: CopyFilesOverSSH@0
+          #   inputs:
+          #     sshEndpoint: 'ec2-dotnet'
+          #     sourceFolder: '$(Build.ArtifactStagingDirectory)'
+          #     contents: '**'
+          #     targetFolder: '/var/www/html/'
+          #     readyTimeout: '20000'
           
     
         

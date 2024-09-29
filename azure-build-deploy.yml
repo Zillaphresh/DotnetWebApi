@@ -45,24 +45,18 @@ stages:
         
         
   - stage: Deploy_Dev
-    pool:
-      name: local
-      demands:
-      - agent.name -equals macAgent
+    dependsOn: Build
     jobs:
-      - deployment: Deploy_to_development
-        strategy: 
-         runOnce:
-           deploy:
-            steps:
-              - task: DownloadBuildArtifacts@1
-                displayName: 'Download Artifacts'
-                inputs:
-                  buildType: 'current'
-                  downloadType: 'single'
-                  artifactName: 'drop'
-                  downloadPath: '$(System.ArtifactsDirectory)'
-        environment:
-         name: staging
-         resourceName:  ip-172-31-6-4
+      - job: DownloadArtifacts
+        steps:
+          - task: DownloadBuildArtifacts@1
+            inputs:
+              buildType: 'specific'
+              project: '5f3cb466-abf0-435f-b35b-bb893740642e'
+              pipeline: '3'
+              specificBuildWithTriggering: true
+              buildVersionToDownload: 'latest'
+              downloadType: 'single'
+              downloadPath: '$(System.ArtifactsDirectory)'
+    
         

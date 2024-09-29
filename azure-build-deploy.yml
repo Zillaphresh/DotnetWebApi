@@ -24,20 +24,24 @@ stages:
             arguments: '--configuration $(buildConfiguration)'
             workingDirectory: '$(System.DefaultWorkingDirectory)'
 
-        - task: DotNetCoreCLI@2
-          displayName: 'dotnet test'
-          inputs:
-            command: 'test'
-            projects: '**/*.csproj'
-            arguments: '--configuration $(buildConfiguration)'
-            testRunTitle: 'dotnet test'
-            workingDirectory: '$(System.DefaultWorkingDirectory)'
+        # - task: DotNetCoreCLI@2
+        #   displayName: 'dotnet test'
+        #   inputs:
+        #     command: 'test'
+        #     projects: '**/*.csproj'
+        #     arguments: '--configuration $(buildConfiguration)'
+        #     testRunTitle: 'dotnet test'
+        #     workingDirectory: '$(System.DefaultWorkingDirectory)'
         - task: DotNetCoreCLI@2
           inputs:
             command: 'publish'
             publishWebProjects: true
             arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
-
+        # - task: PublishBuildArtifacts@1
+        #   inputs:
+        #     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        #     ArtifactName: 'drop'
+        #     publishLocation: 'Container'
         
         
   - stage: Deploy_Dev

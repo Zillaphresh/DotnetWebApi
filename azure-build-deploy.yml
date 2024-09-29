@@ -61,7 +61,7 @@ stages:
           - task: CopyFilesOverSSH@0
             inputs:
               sshEndpoint: 'ec2-dotnet'
-              sourceFolder: '$(Build.ArtifactStagingDirectory)/drop'
+              sourceFolder: '$(Build.ArtifactStagingDirectory)'
               contents: '**'
               targetFolder: '/var/www/html'
               readyTimeout: '20000'

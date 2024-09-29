@@ -43,7 +43,7 @@ stages:
           inputs:
             sshEndpoint: 'ec2-dotnet'
             runOptions: 'commands'
-            commands: 'mkdir /var/www/html'
+            commands: 'sudo mkdir -p /var/www/html'
             readyTimeout: '20000'
         - task: CopyFilesOverSSH@0
           inputs:

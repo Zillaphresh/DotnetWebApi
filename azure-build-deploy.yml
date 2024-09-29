@@ -37,7 +37,7 @@ stages:
             command: 'publish'
             publishWebProjects: true
             arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
-
+        - script: sudo chmod -R $(Build.ArtifactStagingDirectory)
         - task: SSH@0
           displayName: 'Creating a directory'
           inputs:
